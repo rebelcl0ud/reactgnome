@@ -108,7 +108,8 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const status = "Next player: X";
+		// displays player's turn
+		const status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
 
 		return (
 			<div>

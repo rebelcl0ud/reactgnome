@@ -24,22 +24,26 @@ considered private to React component defined in
 Note: JS classes super() needs to be called when defining constructor of subclass
 ALL react component classes that have constructor should start w/ super(props)
 */
-class Square extends React.Component {
+
 /** 
 constructor deleted, Square not keeping track of game's state
 
 onClick prop fn Square can call when clicked
 **/
-	render() {
-		return (
-			<button 
-				className="square"
-				onClick={() => this.props.onClick()}
-			>
-				{this.props.value}
-			</button>
-		);
-	}
+
+/***
+functional components: components that don't have their own state
+and contain only render method
+
+class Square, updated to be a functional component
+()=> removed, needed in class to access correct 'this' value
+***/
+function Square(props) {
+	return (
+		<button className="square" onClick={props.onClick}>
+			{props.value}
+		</button>
+	);
 }
 
 // Board(below) renders 9 squares

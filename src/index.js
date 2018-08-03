@@ -50,28 +50,38 @@ function Square(props) {
 /** 
 best approach; parent Board will store game's state instead of Square
 minimizes bugs, easier to refactor
+
+collecting data from multiple children or comm btwn children,
+shared state must be declared in parent component
+
+parent component can pass state back to children using props,
+keeping children synced with eachother and parent
+
+initial state below corresponds with 9 squares above
 **/
+
+/***
+xIsNext; boolean determines turn/save state
+handleClick update will flip value
+
+
+***/
 class Board extends React.Component {
-	/**
-	collecting data from multiple children or comm btwn children,
-	shared state must be declared in parent component
-
-	parent component can pass state back to children using props,
-	keeping children synced with eachother and parent
-
-	initial state below corresponds with 9 squares above
-	**/
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: Array(9).fill(null),
+			squares: Array(9).fill(null),
+			xIsNext: true,
 		};
 	}
 
 	handleClick(i) {
 		const squares = this.state.squares.slice();
-		squares[i] = 'X';
-		this.setState({squares: squares});
+		squares[i] = this.state.xIsNext ? 'X' : 'O';
+		this.setState({
+			squares: squares,
+			xIsNext: !this.state.xIsNext,
+		});
 	}
 
 	/*
